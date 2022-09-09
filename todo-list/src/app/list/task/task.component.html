@@ -6,5 +6,7 @@
   >
     <mat-icon>delete</mat-icon>
   </button>
-  <mat-checkbox> Task Name </mat-checkbox>
+  <mat-checkbox [checked]="task.checked" (change)="updateTaskStatus(task.id)">
+    {{ task.text }}
+  </mat-checkbox>
 </div>

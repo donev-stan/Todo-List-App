@@ -1,5 +1,8 @@
 <div class="container">
   <app-input></app-input>
-  <app-stats></app-stats>
-  <app-list></app-list>
+  <app-stats
+    [completedTasksCount]="completedTasksCount"
+    [ongoingTasksCount]="ongoingTasksCount"
+  ></app-stats>
+  <app-list [tasks]="tasks"></app-list>
 </div>
