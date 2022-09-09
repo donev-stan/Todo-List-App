@@ -1,9 +1,11 @@
-<p>input works!</p>
-<br />
-<mat-form-field class="example-form-field" appearance="fill">
-  <mat-label>Clearable input</mat-label>
-  <input matInput type="text" placeholder="Enter task" />
-  <button matSuffix mat-icon-button aria-label="Clear">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
+<div class="container">
+  <div class="input-box">
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Enter Task</mat-label>
+      <input matInput value="" />
+    </mat-form-field>
+  </div>
+  <div class="btn-box">
+    <button mat-raised-button color="primary">Add Task</button>
+  </div>
+</div>

@@ -4,7 +4,15 @@ html,
 body {
   height: 100%;
 }
+
 body {
-  margin: 0;
+  margin: 50px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(33, 33, 33);
+  color: white;
+}
+
+.container {
+  border: 1px solid white;
+  display: flex;
 }
