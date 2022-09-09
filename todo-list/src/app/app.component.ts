@@ -54,13 +54,15 @@ export class AppComponent implements OnInit {
     this.inputText = '';
   }
 
-  updateStats(): void {
-    this.tasks = this.taskService.getTasks();
-    this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
-    this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;
+  onTaskStatusChange(): void {
+    this.updateStats();
   }
 
   ngOnInit(): void {
+    this.updateStats();
+  }
+
+  updateStats(): void {
     this.tasks = this.taskService.getTasks();
     this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
     this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;
