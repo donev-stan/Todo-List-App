@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Task } from '../shared/task';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'app-list',
@@ -8,11 +9,24 @@ import { Task } from '../shared/task';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  @Input() tasks: Task[] = [];
+  constructor(private taskService: TaskService) {}
 
-  constructor() {}
+  tasks: Task[] = [];
+
+  @Output() updateStats: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
-    console.log(this.tasks);
+    this.tasks = this.taskService.getTasks();
+  }
+
+  onTaskStatusChange(taskId: number): void {
+    const updatedTasks = this.tasks.map((task: Task) => {
+      if (task.id === taskId) task.checked = !task.checked;
+      return task;
+    });
+
+    this.taskService.setTasks(updatedTasks);
+
+    this.updateStats.emit();
   }
 }

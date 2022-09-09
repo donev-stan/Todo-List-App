@@ -11,8 +11,20 @@ export class AppComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   tasks: Task[] = [];
+  /*
+  // Could be done without the getter and setter & the private attribute on the property _inputText
+  private _inputText: string = '';
 
-  @Input() inputText: string = '';
+  get inputText(): string {
+    return this._inputText;
+  }
+
+  set inputText(value: string) {
+    this._inputText = value;
+  }
+ */
+
+  inputText: string = '';
 
   @Output() completedTasksCount: number = 0;
   @Output() ongoingTasksCount: number = 0;
@@ -21,14 +33,36 @@ export class AppComponent implements OnInit {
     return tasks.filter((task: Task) => task.checked === true).length;
   }
 
-  ngOnInit(): void {
-    this.tasks = this.taskService.getTasks();
-    this.ongoingTasksCount = this.tasks.length;
-    this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
+  createNewTask(): void {
+    this.inputText = this.inputText.trim();
+    if (!this.inputText) return;
+
+    console.log(this.inputText);
+
+    const nextId = this.tasks[this.tasks.length - 1].id + 1;
+
+    const newTask: Task = {
+      id: nextId,
+      text: this.inputText,
+      checked: false,
+    };
+
+    this.tasks.push(newTask);
+    this.taskService.setTasks(this.tasks);
+    this.ongoingTasksCount++;
+
+    this.inputText = '';
   }
 
-  ngOnChanges(): void {
+  updateStats(): void {
     this.tasks = this.taskService.getTasks();
     this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
+    this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;
+  }
+
+  ngOnInit(): void {
+    this.tasks = this.taskService.getTasks();
+    this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
+    this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;
   }
 }

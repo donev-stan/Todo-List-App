@@ -1,8 +1,23 @@
 <div class="container">
-  <app-input></app-input>
+  <div class="container-input">
+    <div class="input-box">
+      <mat-form-field class="full-width" appearance="fill" color="accent">
+        <mat-label>Enter Task</mat-label>
+        <input matInput value="" [(ngModel)]="inputText" />
+      </mat-form-field>
+    </div>
+    <div class="btn-box">
+      <button mat-raised-button color="primary" (click)="createNewTask()">
+        Add Task
+      </button>
+    </div>
+  </div>
+
+  <!-- <app-input></app-input> -->
   <app-stats
     [completedTasksCount]="completedTasksCount"
     [ongoingTasksCount]="ongoingTasksCount"
   ></app-stats>
-  <app-list [tasks]="tasks"></app-list>
+
+  <app-list (updateStats)="updateStats()"></app-list>
 </div>
