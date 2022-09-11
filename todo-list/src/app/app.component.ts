@@ -34,15 +34,8 @@ export class AppComponent implements OnInit {
   }
 
   createNewTask(): void {
-    console.log(`Before Trim: ${this.inputText}`);
     this.inputText = this.inputText.trim();
-    console.log(`After Trim: ${this.inputText}`);
-
     if (!this.inputText) return;
-
-    console.log(`Task Text: ${this.inputText}`);
-
-    // const nextId = this.tasks[this.tasks.length - 1].id + 1;
 
     const newTask: Task = {
       id: this.taskService.generateTaskId(),
