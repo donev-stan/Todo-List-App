@@ -26,19 +26,39 @@ export class TaskService {
     return (
       JSON?.parse(localStorage?.getItem('tasks')!) || [
         {
-          id: '1',
-          text: 'Learn Angular Framework',
-          checked: false,
-        },
-        {
-          id: '2',
-          text: 'Learn Angular Styling Library',
-          checked: false,
-        },
-        {
-          id: '3',
-          text: 'Watch Angular Tutorials',
+          id: 'P07E',
+          text: 'Using Injectable',
           checked: true,
+        },
+        {
+          id: 'KLFG',
+          text: 'Material Theme and Components',
+          checked: true,
+        },
+        {
+          id: '6H*K',
+          text: 'Using Interface to assure correct Task Model',
+          checked: true,
+        },
+        {
+          id: '9F2C',
+          text: 'Passing data between Components',
+          checked: true,
+        },
+        {
+          id: '38FC',
+          text: 'Working with local storage',
+          checked: true,
+        },
+        {
+          id: 'H81K',
+          text: 'Get data from a json file',
+          checked: false,
+        },
+        {
+          id: '08IN',
+          text: 'Implement Observables',
+          checked: false,
         },
       ]
     );
