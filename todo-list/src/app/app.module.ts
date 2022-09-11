@@ -6,19 +6,11 @@ import { AppComponent } from './app.component';
 import { InputComponent } from './input/input.component';
 import { StatsComponent } from './stats/stats.component';
 import { ListComponent } from './list/list.component';
-import { TaskComponent } from './list/task/task.component';
 
 import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    InputComponent,
-    StatsComponent,
-    ListComponent,
-    TaskComponent,
-  ],
-
+  declarations: [AppComponent, InputComponent, StatsComponent, ListComponent],
   imports: [BrowserModule, FormsModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
