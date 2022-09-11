@@ -4,27 +4,4 @@
 
   max-width: 1200px;
   margin: 0 auto;
-
-  .container-input {
-    display: flex;
-
-    height: 50px;
-    gap: 20px;
-
-    width: 80%;
-    margin: 20px auto;
-
-    .input-box {
-      flex: 1;
-      .full-width {
-        width: 100%;
-      }
-    }
-
-    .btn-box {
-      button {
-        height: 100%;
-      }
-    }
-  }
 }
