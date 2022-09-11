@@ -8,9 +8,11 @@ import { TaskService } from 'src/app/shared/task.service';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit {
+  constructor(private taskService: TaskService) {}
+
   @Input() task: any = {};
 
-  updateTaskStatus(taskId: number): void {
+  updateTaskStatus(taskId: string): void {
     const tasks = this.taskService.getTasks();
 
     const updatedTasks = tasks.map((task: Task) => {
@@ -22,8 +24,6 @@ export class TaskComponent implements OnInit {
 
     this.taskService.setTasks(updatedTasks);
   }
-
-  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {}
 }

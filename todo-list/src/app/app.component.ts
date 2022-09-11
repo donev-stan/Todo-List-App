@@ -29,20 +29,23 @@ export class AppComponent implements OnInit {
   @Output() completedTasksCount: number = 0;
   @Output() ongoingTasksCount: number = 0;
 
-  updateCompletedTasksCount(tasks: Task[]): number {
-    return tasks.filter((task: Task) => task.checked === true).length;
+  ngOnInit(): void {
+    this.updateStats();
   }
 
   createNewTask(): void {
+    console.log(`Before Trim: ${this.inputText}`);
     this.inputText = this.inputText.trim();
+    console.log(`After Trim: ${this.inputText}`);
+
     if (!this.inputText) return;
 
-    console.log(this.inputText);
+    console.log(`Task Text: ${this.inputText}`);
 
-    const nextId = this.tasks[this.tasks.length - 1].id + 1;
+    // const nextId = this.tasks[this.tasks.length - 1].id + 1;
 
     const newTask: Task = {
-      id: nextId,
+      id: this.taskService.generateTaskId(),
       text: this.inputText,
       checked: false,
     };
@@ -58,13 +61,13 @@ export class AppComponent implements OnInit {
     this.updateStats();
   }
 
-  ngOnInit(): void {
-    this.updateStats();
-  }
-
   updateStats(): void {
     this.tasks = this.taskService.getTasks();
     this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
     this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;
+  }
+
+  updateCompletedTasksCount(tasks: Task[]): number {
+    return tasks.filter((task: Task) => task.checked === true).length;
   }
 }

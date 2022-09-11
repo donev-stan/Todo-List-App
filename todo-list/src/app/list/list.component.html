@@ -2,17 +2,11 @@
   <!-- <app-task *ngFor="let task of tasks" [task]="task"></app-task> -->
 
   <div class="container-task" *ngFor="let task of tasks">
-    <button
-      mat-icon-button
-      color="warn"
-      aria-label="Example icon button with a home icon"
-    >
+    <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+      (click)="deleteTask(task.id)">
       <mat-icon>delete</mat-icon>
     </button>
-    <mat-checkbox
-      [checked]="task.checked"
-      (change)="onTaskStatusChange(task.id)"
-    >
+    <mat-checkbox [checked]="task.checked" (change)="onTaskStatusChange(task.id)">
       {{ task.text }}
     </mat-checkbox>
   </div>
