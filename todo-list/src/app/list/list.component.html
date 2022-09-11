@@ -5,7 +5,7 @@
     <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
       <mat-icon>delete</mat-icon>
     </button>
-    <mat-checkbox [checked]="task.checked" (change)="onTaskStatusChange(task.id)">
+    <mat-checkbox [checked]="task.checked" (change)="onTaskStatusChange(task.id)" [class.checked-task]="task.checked">
       {{ task.text }}
     </mat-checkbox>
   </div>

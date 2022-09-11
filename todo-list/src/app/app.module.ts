@@ -7,7 +7,7 @@ import { InputComponent } from './input/input.component';
 import { StatsComponent } from './stats/stats.component';
 import { ListComponent } from './list/list.component';
 
-import { MaterialModule } from './shared/material/material.module';
+import { MaterialModule } from './shared/material.module';
 
 @NgModule({
   declarations: [AppComponent, InputComponent, StatsComponent, ListComponent],

@@ -15,9 +15,13 @@
 
     transition: all 0.1s;
 
-    &:hover {
-      transform: translateY(-1px);
+    .checked-task {
+      text-decoration: line-through;
     }
+
+    // &:hover {
+    //   transform: translateY(-1px);
+    // }
 
     button {
       &:hover {
