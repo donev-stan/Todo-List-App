@@ -2,7 +2,7 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Task } from '../shared/task';
 import { TaskService } from '../shared/task.service';
-import { EditDialogComponent } from './edit-task/edit-dialog.component';
+import { EditDialogComponent } from './edit-task-dialog/edit-dialog.component';
 
 import { Dialog } from '@angular/cdk/dialog';
 

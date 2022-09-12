@@ -8,7 +8,7 @@ import { StatsComponent } from './stats/stats.component';
 import { ListComponent } from './list/list.component';
 
 import { MaterialModule } from './shared/material.module';
-import { EditDialogComponent } from './list/edit-task/edit-dialog.component';
+import { EditDialogComponent } from './list/edit-task-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [

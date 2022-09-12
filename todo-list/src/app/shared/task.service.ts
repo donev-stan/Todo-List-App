@@ -24,7 +24,7 @@ export class TaskService {
 
   retrieveData(): Task[] {
     return (
-      JSON?.parse(localStorage?.getItem('tasks')!) || [
+      JSON.parse(localStorage.getItem('tasks')!) || [
         {
           id: 'P07E',
           text: 'Using Injectable',

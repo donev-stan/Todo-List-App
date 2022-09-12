@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   @Output() ongoingTasksCount: number = 0;
 
   ngOnInit(): void {
-    this.updateStats();
+    this.updateAppState();
   }
 
   createNewTask($taskText: string): void {
@@ -35,10 +35,10 @@ export class AppComponent implements OnInit {
   }
 
   onTaskStatusChange(): void {
-    this.updateStats();
+    this.updateAppState();
   }
 
-  updateStats(): void {
+  updateAppState(): void {
     this.tasks = this.taskService.getTasks();
     this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
     this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;

@@ -3,11 +3,10 @@
 
   <div mat-dialog-content>
     <mat-form-field class="mat-form-field" color="primary">
-      <!-- <mat-label>Edit Task</mat-label> -->
       <input
         matInput
-        [(ngModel)]="editText"
-        (keyup.enter)="dialogRef.close(finalData)"
+        [(ngModel)]="editTextInput"
+        (keyup.enter)="dialogRef.close(editedTask)"
       />
     </mat-form-field>
   </div>
@@ -16,8 +15,8 @@
     <button
       mat-raised-button
       color="primary"
-      (click)="dialogRef.close(finalData)"
-      [disabled]="!editText.trim()"
+      (click)="dialogRef.close(editedTask)"
+      [disabled]="!editTextInput.trim()"
     >
       Save
     </button>
@@ -26,5 +25,3 @@
     </button>
   </div>
 </div>
-
-<!-- [mat-dialog-close]="finalData" -->
