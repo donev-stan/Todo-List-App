@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
     this.updateStats.emit();
   }
 
-  openDialog(task: any): void {
+  openDialog(task: Task): void {
     const dialogRef = this.dialog.open<string>(EditDialogComponent, {
       data: task,
     });
@@ -50,6 +50,7 @@ export class ListComponent implements OnInit {
       if (!editedTask) return;
 
       const { taskId, editedText } = editedTask;
+      if (!editedText.trim()) return;
 
       const updatedTasks = this.tasks.map((task: Task) => {
         if (task.id === taskId) task.text = editedText;
