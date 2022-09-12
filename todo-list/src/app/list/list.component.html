@@ -5,8 +5,22 @@
     <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
       <mat-icon>delete</mat-icon>
     </button>
-    <mat-checkbox [checked]="task.checked" (change)="onTaskStatusChange(task.id)" [class.checked-task]="task.checked">
+
+    <mat-checkbox
+      [checked]="task.checked"
+      (change)="onTaskStatusChange(task.id)"
+      [class.checked-task]="task.checked"
+    >
       {{ task.text }}
     </mat-checkbox>
+
+    <button
+      *ngIf="!task.checked"
+      mat-icon-button
+      color="secondary"
+      (click)="openDialog(task)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
 </div>

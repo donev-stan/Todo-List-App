@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { DialogModule } from '@angular/cdk/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -19,6 +21,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatGridListModule,
+    DialogModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

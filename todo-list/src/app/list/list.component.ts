@@ -2,6 +2,9 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Task } from '../shared/task';
 import { TaskService } from '../shared/task.service';
+import { EditDialogComponent } from './edit-task/edit-dialog.component';
+
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-list',
@@ -9,7 +12,7 @@ import { TaskService } from '../shared/task.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, public dialog: Dialog) {}
 
   tasks: Task[] = [];
 
@@ -36,5 +39,24 @@ export class ListComponent implements OnInit {
     this.tasks = updatedTasks;
 
     this.updateStats.emit();
+  }
+
+  openDialog(task: any): void {
+    const dialogRef = this.dialog.open<string>(EditDialogComponent, {
+      data: task,
+    });
+
+    dialogRef.closed.subscribe((editedTask: any) => {
+      if (!editedTask) return;
+
+      const { taskId, editedText } = editedTask;
+
+      const updatedTasks = this.tasks.map((task: Task) => {
+        if (task.id === taskId) task.text = editedText;
+        return task;
+      });
+
+      this.taskService.setTasks(updatedTasks);
+    });
   }
 }
