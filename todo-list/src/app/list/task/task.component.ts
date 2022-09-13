@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../shared/task';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -13,6 +15,8 @@ export class TaskComponent {
   @Output() deleteReq: EventEmitter<string> = new EventEmitter();
   @Output() editReq: EventEmitter<Task> = new EventEmitter();
 
+  constructor(private snackBar: MatSnackBar) {}
+
   onTaskStatusChange(): void {
     this.statusChanged.emit(this.task.id);
   }
@@ -23,5 +27,15 @@ export class TaskComponent {
 
   onEditTask(): void {
     this.editReq.emit(this.task);
+  }
+
+  ngOnDestroy(): void {
+    this.snackBar.open(
+      `${this.task.checked ? 'Completed' : 'Ongoing'} Task Deleted!`,
+      'Dismiss',
+      {
+        duration: 3000,
+      }
+    );
   }
 }
