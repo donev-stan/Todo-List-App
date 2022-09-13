@@ -53,7 +53,7 @@ export class ListComponent implements OnInit {
       if (!editedText.trim()) return;
 
       const updatedTasks = this.tasks.map((task: Task) => {
-        if (task.id === taskId) task.text = editedText;
+        if (task.id === taskId) task.text = editedText.trim();
         return task;
       });
 
