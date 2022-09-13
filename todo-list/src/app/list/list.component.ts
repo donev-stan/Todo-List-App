@@ -16,7 +16,7 @@ export class ListComponent implements OnInit {
 
   tasks: Task[] = [];
 
-  @Output() updateStats: EventEmitter<any> = new EventEmitter();
+  @Output() updateStats: EventEmitter<void> = new EventEmitter();
 
   ngOnInit(): void {
     this.tasks = this.taskService.getTasks();
