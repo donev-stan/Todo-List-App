@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
     this.tasks = this.taskService.getTasks();
   }
 
-  onTaskStatusChange(taskId: string): void {
+  changeTaskStatus(taskId: string): void {
     const updatedTasks = this.tasks.map((task: Task) => {
       if (task.id === taskId) task.checked = !task.checked;
       return task;

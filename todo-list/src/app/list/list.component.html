@@ -2,8 +2,19 @@
   <app-task
     *ngFor="let task of tasks"
     [task]="task"
-    (statusChanged)="onTaskStatusChange($event)"
+    (statusChanged)="changeTaskStatus($event)"
     (deleteReq)="deleteTask($event)"
     (editReq)="editTask($event)"
   ></app-task>
 </div>
+
+<!-- Could be done this way as well -->
+<!-- <div class="container">
+  <app-task
+    *ngFor="let task of tasks"
+    [task]="task"
+    (statusChanged)="changeTaskStatus(task.id)"
+    (deleteReq)="deleteTask(task.id)"
+    (editReq)="editTask(task)"
+  ></app-task>
+</div> -->

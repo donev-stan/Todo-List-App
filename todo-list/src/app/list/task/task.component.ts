@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  @Input() task: any;
+  @Input() task: any; // BUG: When I change the type to Task
 
   @Output() statusChanged: EventEmitter<string> = new EventEmitter();
   @Output() deleteReq: EventEmitter<string> = new EventEmitter();
