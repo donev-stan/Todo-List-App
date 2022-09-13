@@ -1,26 +1,9 @@
 <div class="container">
-  <!-- <app-task *ngFor="let task of tasks" [task]="task"></app-task> -->
-
-  <div class="container-task" *ngFor="let task of tasks">
-    <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
-      <mat-icon>delete</mat-icon>
-    </button>
-
-    <mat-checkbox
-      [checked]="task.checked"
-      (change)="onTaskStatusChange(task.id)"
-      [class.checked-task]="task.checked"
-    >
-      {{ task.text }}
-    </mat-checkbox>
-
-    <button
-      *ngIf="!task.checked"
-      mat-icon-button
-      color="secondary"
-      (click)="openDialog(task)"
-    >
-      <mat-icon>edit</mat-icon>
-    </button>
-  </div>
+  <app-task
+    *ngFor="let task of tasks"
+    [task]="task"
+    (statusChanged)="onTaskStatusChange($event)"
+    (deleteReq)="deleteTask($event)"
+    (editReq)="editTask($event)"
+  ></app-task>
 </div>

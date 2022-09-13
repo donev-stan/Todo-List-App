@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
     this.updateStats.emit();
   }
 
-  openDialog(task: Task): void {
+  editTask(task: Task): void {
     const dialogRef = this.dialog.open<string>(EditDialogComponent, {
       data: task,
     });

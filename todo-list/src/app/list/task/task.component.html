@@ -1,0 +1,22 @@
+<div class="container-task">
+  <button mat-icon-button color="warn" (click)="onDeleteTask()">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <mat-checkbox
+    [checked]="task.checked"
+    (change)="onTaskStatusChange()"
+    [class.checked-task]="task.checked"
+  >
+    {{ task.text }}
+  </mat-checkbox>
+
+  <button
+    *ngIf="!task.checked"
+    mat-icon-button
+    color="secondary"
+    (click)="onEditTask()"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>

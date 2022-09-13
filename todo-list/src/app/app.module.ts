@@ -9,6 +9,7 @@ import { ListComponent } from './list/list.component';
 
 import { MaterialModule } from './shared/material.module';
 import { EditDialogComponent } from './list/edit-task-dialog/edit-dialog.component';
+import { TaskComponent } from './list/task/task.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EditDialogComponent } from './list/edit-task-dialog/edit-dialog.compone
     StatsComponent,
     ListComponent,
     EditDialogComponent,
+    TaskComponent,
   ],
   imports: [BrowserModule, FormsModule, MaterialModule],
   providers: [],
