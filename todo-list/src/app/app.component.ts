@@ -36,11 +36,15 @@ export class AppComponent implements OnInit {
 
   updateAppState(): void {
     this.tasks = this.taskService.getTasks();
-    this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
-    this.ongoingTasksCount = this.tasks.length - this.completedTasksCount;
+    this.completedTasksCount = this.updateCompletedTasksCount();
+    this.ongoingTasksCount = this.updateOngoingTasksCount();
   }
 
-  updateCompletedTasksCount(tasks: Task[]): number {
-    return tasks.filter((task: Task) => task.checked === true).length;
+  updateCompletedTasksCount(): number {
+    return this.tasks.filter((task: Task) => task.checked === true).length;
+  }
+
+  updateOngoingTasksCount(): number {
+    return this.tasks.length - this.completedTasksCount;
   }
 }
