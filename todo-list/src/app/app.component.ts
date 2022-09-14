@@ -10,10 +10,21 @@ import { TaskService } from './shared/task.service';
 export class AppComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
+  filteredTasks: Task[] = [];
+
   @Output() tasks: Task[] = [];
 
   @Output() completedTasksCount: number = 0;
   @Output() ongoingTasksCount: number = 0;
+
+  @Input() private _filterKeyword: string = '';
+
+  set filterKeyword(value: string) {
+    this._filterKeyword = value.toLowerCase();
+    this.filteredTasks = this.tasks.filter((task: Task) =>
+      task.text.toLowerCase().includes(this._filterKeyword)
+    );
+  }
 
   ngOnInit(): void {
     this.updateAppState();
@@ -36,6 +47,7 @@ export class AppComponent implements OnInit {
 
   updateAppState(): void {
     this.tasks = this.taskService.getTasks();
+    this.filteredTasks = this.tasks;
     this.completedTasksCount = this.updateCompletedTasksCount();
     this.ongoingTasksCount = this.updateOngoingTasksCount();
   }
