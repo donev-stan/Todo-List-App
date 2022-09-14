@@ -10,7 +10,7 @@ import { TaskService } from './shared/task.service';
 export class AppComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
-  tasks: Task[] = [];
+  @Output() tasks: Task[] = [];
 
   @Output() completedTasksCount: number = 0;
   @Output() ongoingTasksCount: number = 0;

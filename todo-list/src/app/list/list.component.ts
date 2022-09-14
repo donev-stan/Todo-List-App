@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Task } from '../shared/task';
 import { TaskService } from '../shared/task.service';
@@ -11,16 +11,12 @@ import { Dialog } from '@angular/cdk/dialog';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   constructor(private taskService: TaskService, public dialog: Dialog) {}
 
-  tasks: Task[] = [];
+  @Input() tasks: Task[] = [];
 
-  @Output() updateStats: EventEmitter<void> = new EventEmitter();
-
-  ngOnInit(): void {
-    this.tasks = this.taskService.getTasks();
-  }
+  @Output() updateApp: EventEmitter<void> = new EventEmitter();
 
   changeTaskStatus(taskId: string): void {
     const updatedTasks = this.tasks.map((task: Task) => {
@@ -30,15 +26,14 @@ export class ListComponent implements OnInit {
 
     this.taskService.setTasks(updatedTasks);
 
-    this.updateStats.emit();
+    this.updateApp.emit();
   }
 
   deleteTask(taskId: string): void {
     const updatedTasks = this.tasks.filter((task: Task) => task.id !== taskId);
     this.taskService.setTasks(updatedTasks);
-    this.tasks = updatedTasks;
 
-    this.updateStats.emit();
+    this.updateApp.emit();
   }
 
   editTask(task: Task): void {

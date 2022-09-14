@@ -1,7 +1,10 @@
 <div class="container">
   <app-input (inputTextMsg)="createNewTask($event)"></app-input>
 
-  <app-stats [completedTasksCount]="completedTasksCount" [ongoingTasksCount]="ongoingTasksCount"></app-stats>
+  <app-stats
+    [completedTasksCount]="completedTasksCount"
+    [ongoingTasksCount]="ongoingTasksCount"
+  ></app-stats>
 
-  <app-list (updateStats)="onTaskStatusChange()"></app-list>
+  <app-list [tasks]="tasks" (updateApp)="updateAppState()"></app-list>
 </div>
