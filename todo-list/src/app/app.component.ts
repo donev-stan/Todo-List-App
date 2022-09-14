@@ -34,10 +34,6 @@ export class AppComponent implements OnInit {
     this.ongoingTasksCount++;
   }
 
-  onTaskStatusChange(): void {
-    this.updateAppState();
-  }
-
   updateAppState(): void {
     this.tasks = this.taskService.getTasks();
     this.completedTasksCount = this.updateCompletedTasksCount(this.tasks);
