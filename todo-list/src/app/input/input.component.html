@@ -1,8 +1,13 @@
 <div class="container unselectable">
   <div class="input-box">
     <mat-form-field class="full-width" appearance="fill" color="accent">
-      <mat-label>Enter Task</mat-label>
-      <input matInput value="" [(ngModel)]="inputText" (keyup.enter)="addTaskToList()" />
+      <mat-label>Enter / Search Task</mat-label>
+      <input
+        matInput
+        value=""
+        [(ngModel)]="inputText"
+        (keyup.enter)="addTaskToList()"
+      />
     </mat-form-field>
   </div>
   <div class="btn-box">

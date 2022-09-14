@@ -21,6 +21,10 @@ export class AppComponent implements OnInit {
 
   set filterKeyword(value: string) {
     this._filterKeyword = value.toLowerCase();
+    this.filterTasks();
+  }
+
+  filterTasks(): void {
     this.filteredTasks = this.tasks.filter((task: Task) =>
       task.text.toLowerCase().includes(this._filterKeyword)
     );
