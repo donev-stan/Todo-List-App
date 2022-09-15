@@ -5,6 +5,7 @@
   ></app-input>
 
   <app-stats
+    [allTasksCount]="allTasksCount"
     [completedTasksCount]="completedTasksCount"
     [ongoingTasksCount]="ongoingTasksCount"
     (filterTasks)="filterTasks($event)"

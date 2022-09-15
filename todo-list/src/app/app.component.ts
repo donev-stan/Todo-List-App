@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   @Output() tasks: Task[] = [];
 
+  @Output() allTasksCount: number = 0;
   @Output() completedTasksCount: number = 0;
   @Output() ongoingTasksCount: number = 0;
 
@@ -69,11 +70,13 @@ export class AppComponent implements OnInit {
     this.tasks.push(newTask);
     this.taskService.setTasks(this.tasks);
     this.ongoingTasksCount++;
+    this.allTasksCount++;
   }
 
   updateAppState(updateFilteredTasks?: any): void {
     this.tasks = this.taskService.getTasks();
 
+    this.allTasksCount = this.tasks.length;
     this.completedTasksCount = this.updateCompletedTasksCount();
     this.ongoingTasksCount = this.updateOngoingTasksCount();
 
