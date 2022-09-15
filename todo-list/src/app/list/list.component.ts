@@ -16,7 +16,7 @@ export class ListComponent {
 
   @Input() tasks: Task[] = [];
 
-  @Output() updateApp: EventEmitter<void> = new EventEmitter();
+  @Output() updateApp: EventEmitter<any> = new EventEmitter();
 
   changeTaskStatus(taskId: string): void {
     const updatedTasks = this.taskService.getTasks().map((task: Task) => {
@@ -26,7 +26,7 @@ export class ListComponent {
 
     this.taskService.setTasks(updatedTasks);
 
-    this.updateApp.emit();
+    this.updateApp.emit('updateFilteredTasks');
   }
 
   deleteTask(taskId: string): void {
@@ -35,7 +35,7 @@ export class ListComponent {
       .filter((task: Task) => task.id !== taskId);
     this.taskService.setTasks(updatedTasks);
 
-    this.updateApp.emit();
+    this.updateApp.emit('updateFilteredTasks');
   }
 
   editTask(task: Task): void {

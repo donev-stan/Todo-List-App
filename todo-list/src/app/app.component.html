@@ -10,5 +10,8 @@
     (filterTasks)="filterTasks($event)"
   ></app-stats>
 
-  <app-list [tasks]="filteredTasks" (updateApp)="updateAppState()"></app-list>
+  <app-list
+    [tasks]="filteredTasks"
+    (updateApp)="updateAppState($event)"
+  ></app-list>
 </div>

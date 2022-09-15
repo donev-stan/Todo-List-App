@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
 
   @Input() private _filterKeyword: string = '';
 
+  filteredTasksGroups: 'all' | 'completed' | 'ongoing' = 'all';
+
   set filterKeyword(value: string) {
     this._filterKeyword = value.toLowerCase();
     this.filterTasksByKeyword();
@@ -30,7 +32,9 @@ export class AppComponent implements OnInit {
     );
   }
 
-  filterTasks(selector: string): void {
+  filterTasks(selector: any): void {
+    this.filteredTasksGroups = selector;
+
     switch (selector) {
       case 'completed':
         this.filteredTasks = this.tasks.filter((task: Task) => task.checked);
@@ -66,11 +70,17 @@ export class AppComponent implements OnInit {
     this.ongoingTasksCount++;
   }
 
-  updateAppState(): void {
+  updateAppState(updateFilteredTasks?: any): void {
     this.tasks = this.taskService.getTasks();
-    // this.filteredTasks = this.tasks;
+
     this.completedTasksCount = this.updateCompletedTasksCount();
     this.ongoingTasksCount = this.updateOngoingTasksCount();
+
+    if (updateFilteredTasks) {
+      setTimeout(() => {
+        this.filterTasks(this.filteredTasksGroups);
+      }, 500);
+    }
   }
 
   updateCompletedTasksCount(): number {
