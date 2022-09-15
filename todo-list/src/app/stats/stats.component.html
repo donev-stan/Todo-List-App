@@ -1,9 +1,23 @@
 <div class="container unselectable">
-  <p appHighlightStats highlightColor="wheat">All Tasks: 7</p>
-  <p appHighlightStats highlightColor="#69f0ae">
+  <p
+    appHighlightStats
+    highlightColor="wheat"
+    (click)="chnageSeleltedTasks('all')"
+  >
+    All Tasks: 7
+  </p>
+  <p
+    appHighlightStats
+    highlightColor="#69f0ae"
+    (click)="chnageSeleltedTasks('completed')"
+  >
     Completed Tasks: {{ completedTasksCount }}
   </p>
-  <p appHighlightStats highlightColor="#ffd740">
+  <p
+    appHighlightStats
+    highlightColor="#ffd740"
+    (click)="chnageSeleltedTasks('ongoing')"
+  >
     Ongoing Tasks: {{ ongoingTasksCount }}
   </p>
 </div>

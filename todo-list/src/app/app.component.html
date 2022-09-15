@@ -7,6 +7,7 @@
   <app-stats
     [completedTasksCount]="completedTasksCount"
     [ongoingTasksCount]="ongoingTasksCount"
+    (filterTasks)="filterTasks($event)"
   ></app-stats>
 
   <app-list [tasks]="filteredTasks" (updateApp)="updateAppState()"></app-list>
