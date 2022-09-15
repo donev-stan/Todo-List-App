@@ -19,7 +19,7 @@ export class ListComponent {
   @Output() updateApp: EventEmitter<void> = new EventEmitter();
 
   changeTaskStatus(taskId: string): void {
-    const updatedTasks = this.tasks.map((task: Task) => {
+    const updatedTasks = this.taskService.getTasks().map((task: Task) => {
       if (task.id === taskId) task.checked = !task.checked;
       return task;
     });
@@ -30,7 +30,9 @@ export class ListComponent {
   }
 
   deleteTask(taskId: string): void {
-    const updatedTasks = this.tasks.filter((task: Task) => task.id !== taskId);
+    const updatedTasks = this.taskService
+      .getTasks()
+      .filter((task: Task) => task.id !== taskId);
     this.taskService.setTasks(updatedTasks);
 
     this.updateApp.emit();
@@ -47,7 +49,7 @@ export class ListComponent {
       const { taskId, editedText } = editedTask;
       if (!editedText.trim()) return;
 
-      const updatedTasks = this.tasks.map((task: Task) => {
+      const updatedTasks = this.taskService.getTasks().map((task: Task) => {
         if (task.id === taskId) task.text = editedText.trim();
         return task;
       });
