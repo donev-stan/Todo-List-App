@@ -1,4 +1,9 @@
 <div class="container unselectable">
-  <p>Completed Tasks: {{ completedTasksCount }}</p>
-  <p>Ongoing Tasks: {{ ongoingTasksCount }}</p>
+  <p appHighlightStats highlightColor="wheat">All Tasks: 7</p>
+  <p appHighlightStats highlightColor="#69f0ae">
+    Completed Tasks: {{ completedTasksCount }}
+  </p>
+  <p appHighlightStats highlightColor="#ffd740">
+    Ongoing Tasks: {{ ongoingTasksCount }}
+  </p>
 </div>

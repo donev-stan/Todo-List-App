@@ -10,6 +10,7 @@ import { ListComponent } from './list/list.component';
 import { MaterialModule } from './shared/material.module';
 import { EditDialogComponent } from './list/edit-task-dialog/edit-dialog.component';
 import { TaskComponent } from './list/task/task.component';
+import { HighlightStatsDirective } from './stats/highlight-stats.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TaskComponent } from './list/task/task.component';
     ListComponent,
     EditDialogComponent,
     TaskComponent,
+    HighlightStatsDirective,
   ],
   imports: [BrowserModule, FormsModule, MaterialModule],
   providers: [],
