@@ -21,13 +21,29 @@ export class AppComponent implements OnInit {
 
   set filterKeyword(value: string) {
     this._filterKeyword = value.toLowerCase();
-    this.filterTasks();
+    this.filterTasksByKeyword();
   }
 
-  filterTasks(): void {
+  filterTasksByKeyword(): void {
     this.filteredTasks = this.tasks.filter((task: Task) =>
       task.text.toLowerCase().includes(this._filterKeyword)
     );
+  }
+
+  filterTasks(selector: string): void {
+    switch (selector) {
+      case 'completed':
+        this.filteredTasks = this.tasks.filter((task: Task) => task.checked);
+        break;
+
+      case 'ongoing':
+        this.filteredTasks = this.tasks.filter((task: Task) => !task.checked);
+        break;
+
+      default:
+        this.filteredTasks = this.tasks;
+        break;
+    }
   }
 
   ngOnInit(): void {
