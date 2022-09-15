@@ -1,10 +1,13 @@
 <div class="container">
-  <app-input (inputTextMsg)="createNewTask($event)"></app-input>
+  <app-input
+    (inputTextMsg)="createNewTask($event)"
+    (filterKeyword)="filterKeyword = $event"
+  ></app-input>
 
   <app-stats
     [completedTasksCount]="completedTasksCount"
     [ongoingTasksCount]="ongoingTasksCount"
   ></app-stats>
 
-  <app-list [tasks]="tasks" (updateApp)="updateAppState()"></app-list>
+  <app-list [tasks]="filteredTasks" (updateApp)="updateAppState()"></app-list>
 </div>

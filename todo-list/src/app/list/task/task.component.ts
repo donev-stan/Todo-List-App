@@ -23,13 +23,7 @@ export class TaskComponent {
 
   onDeleteTask(): void {
     this.deleteReq.emit(this.task.id);
-  }
 
-  onEditTask(): void {
-    this.editReq.emit(this.task);
-  }
-
-  ngOnDestroy(): void {
     this.snackBar.open(
       `${this.task.checked ? 'Completed' : 'Ongoing'} Task Deleted!`,
       'Dismiss',
@@ -37,5 +31,9 @@ export class TaskComponent {
         duration: 3000,
       }
     );
+  }
+
+  onEditTask(): void {
+    this.editReq.emit(this.task);
   }
 }
