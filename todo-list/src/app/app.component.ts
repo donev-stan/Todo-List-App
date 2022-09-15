@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
   }
 
   filterTasksByKeyword(): void {
-    this.filteredTasks = this.tasks.filter((task: Task) =>
+    this.filterTasks(this.filteredTasksGroups);
+    this.filteredTasks = this.filteredTasks.filter((task: Task) =>
       task.text.toLowerCase().includes(this._filterKeyword)
     );
   }
