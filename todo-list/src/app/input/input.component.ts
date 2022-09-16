@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'app-input',
@@ -6,10 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  private _inputText: string = '';
+  constructor(private taskService: TaskService) {}
 
-  @Output() inputTextMsg: EventEmitter<string> = new EventEmitter();
-  @Output() filterKeyword: EventEmitter<string> = new EventEmitter();
+  private _inputText: string = '';
 
   get inputText(): string {
     return this._inputText;
@@ -17,12 +17,14 @@ export class InputComponent {
 
   set inputText(value: string) {
     this._inputText = value;
-    this.filterKeyword.emit(this._inputText);
+    this.taskService.filterKeyword = this._inputText;
   }
 
   addTaskToList(): void {
-    this.inputTextMsg.emit(this._inputText);
+    this._inputText.trim();
+    if (!this._inputText) return;
+
+    this.taskService.addNewTask(this._inputText);
     this._inputText = '';
-    this.filterKeyword.emit(this._inputText);
   }
 }
