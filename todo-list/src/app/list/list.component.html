@@ -1,12 +1,6 @@
 <div class="container">
   <div class="no-tasks" *ngIf="!tasks.length">No tasks found. Add new one!</div>
-  <app-task
-    *ngFor="let task of tasks"
-    [task]="task"
-    (statusChanged)="changeTaskStatus($event)"
-    (deleteReq)="deleteTask($event)"
-    (editReq)="editTask($event)"
-  ></app-task>
+  <app-task *ngFor="let task of tasks" [task]="task"></app-task>
 </div>
 
 <!-- Could be done this way as well -->
