@@ -14,14 +14,8 @@ export class StatsComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
-    this.taskService.updateTaskCounts();
-    console.log('in component init');
-    console.log(this.allTasksCount);
-
     this.taskService.taskCountUpdated.subscribe(
       ({ allCount, completedCount, ongoingCount }) => {
-        console.log('allCount: ' + allCount);
-
         this.allTasksCount = allCount;
         this.completedTasksCount = completedCount;
         this.ongoingTasksCount = ongoingCount;

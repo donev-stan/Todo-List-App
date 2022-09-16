@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Task } from './task';
 
 import { Dialog } from '@angular/cdk/dialog';
@@ -7,12 +7,8 @@ import { EditDialogComponent } from '../list/edit-task-dialog/edit-dialog.compon
 @Injectable({
   providedIn: 'root',
 })
-export class TaskService implements OnInit {
+export class TaskService {
   constructor(public dialog: Dialog) {}
-
-  ngOnInit(): void {
-    this.updateTaskCounts();
-  }
 
   private tasks: Task[] = this.retrieveData();
 
