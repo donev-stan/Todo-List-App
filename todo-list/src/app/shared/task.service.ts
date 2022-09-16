@@ -16,49 +16,38 @@ export class TaskService {
   private completedTasksCount: number = 0;
   private ongoingTasksCount: number = 0;
 
+  private _filterKeyword: string = 'all';
+
   tasksUpdated: EventEmitter<Task[]> = new EventEmitter();
   taskCountUpdated: EventEmitter<any> = new EventEmitter();
 
-  defaultData = [
-    {
-      id: 'P07E',
-      text: 'Using Injectable',
-      checked: true,
-    },
-    {
-      id: 'KLFG',
-      text: 'Material Theme and Components',
-      checked: true,
-    },
-    {
-      id: '6H*K',
-      text: 'Using Interface to assure correct Task Model',
-      checked: true,
-    },
-    {
-      id: '9F2C',
-      text: 'Passing data between Components',
-      checked: true,
-    },
-    {
-      id: '38FC',
-      text: 'Working with local storage',
-      checked: true,
-    },
-    {
-      id: 'H81K',
-      text: 'Get data from a json file',
-      checked: false,
-    },
-    {
-      id: '08IN',
-      text: 'Implement Observables',
-      checked: false,
-    },
-  ];
+  set filterKeyword(value: string) {
+    console.log(value);
+
+    this._filterKeyword = value;
+    this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+  }
 
   getTasks(): Task[] {
-    return this.tasks.slice();
+    return this.filterTasks(this._filterKeyword);
+  }
+
+  filterTasks(keyword: string): Task[] {
+    switch (keyword) {
+      case 'all':
+        return this.tasks.slice();
+
+      case 'completed':
+        return this.tasks.filter((task: Task) => task.checked);
+
+      case 'ongoing':
+        return this.tasks.filter((task: Task) => !task.checked);
+
+      default:
+        return this.tasks.filter((task: Task) =>
+          task.text.toLowerCase().includes(keyword.toLowerCase())
+        );
+    }
   }
 
   addNewTask(taskText: string): void {
@@ -68,18 +57,13 @@ export class TaskService {
       checked: false,
     };
 
-    console.log(this.tasks);
-
     this.tasks.push(newTask);
-    this.tasksUpdated.emit(this.tasks);
+    this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
     this.updateTaskCounts();
     this.setToLocalStorage();
   }
 
   updateTaskCounts(): void {
-    console.log('in service');
-    console.log(this.tasks);
-
     this.allTasksCount = this.tasks.length;
     this.completedTasksCount = this.tasks.filter(
       (task: Task) => task.checked === true
@@ -92,8 +76,6 @@ export class TaskService {
       ongoingCount: this.ongoingTasksCount,
     };
 
-    console.log(updatedCounts);
-
     this.taskCountUpdated.emit(updatedCounts);
   }
 
@@ -102,7 +84,9 @@ export class TaskService {
       if (task.id === taskId) task.checked = !task.checked;
     });
 
-    this.tasksUpdated.emit(this.tasks);
+    setTimeout(() => {
+      this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+    }, 500);
     this.updateTaskCounts();
     this.setToLocalStorage();
   }
@@ -123,7 +107,7 @@ export class TaskService {
         return task;
       });
 
-      this.tasksUpdated.emit(this.tasks);
+      this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
       this.setToLocalStorage();
     });
   }
@@ -131,10 +115,7 @@ export class TaskService {
   deleteTask(taskId: string): void {
     this.tasks = this.tasks.filter((task: Task) => task.id !== taskId);
 
-    setTimeout(() => {
-      this.tasksUpdated.emit(this.tasks);
-    }, 300);
-
+    this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
     this.updateTaskCounts();
     this.setToLocalStorage();
   }
@@ -150,6 +131,39 @@ export class TaskService {
   }
 
   retrieveData(): Task[] {
-    return JSON.parse(localStorage.getItem('tasks')!) || this.defaultData;
+    return (
+      JSON.parse(localStorage.getItem('tasks')!) || [
+        {
+          id: 'asda',
+          text: 'Task List To Do 1',
+          checked: false,
+        },
+        {
+          id: 'oaishda',
+          text: 'Task List To Do 2',
+          checked: false,
+        },
+        {
+          id: 'asddfbdfa',
+          text: 'Task List To Do 3',
+          checked: false,
+        },
+        {
+          id: 'asdaqwed',
+          text: 'Task List To Do 4',
+          checked: true,
+        },
+        {
+          id: 'asd1231da',
+          text: 'Task List To Do 5',
+          checked: true,
+        },
+        {
+          id: 'asd4e3wfw32a',
+          text: 'Task List To Do 6',
+          checked: true,
+        },
+      ]
+    );
   }
 }

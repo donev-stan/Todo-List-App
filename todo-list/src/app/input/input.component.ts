@@ -11,15 +11,13 @@ export class InputComponent {
 
   private _inputText: string = '';
 
-  @Output() filterKeyword: EventEmitter<string> = new EventEmitter();
-
   get inputText(): string {
     return this._inputText;
   }
 
   set inputText(value: string) {
     this._inputText = value;
-    this.filterKeyword.emit(this._inputText);
+    this.taskService.filterKeyword = this._inputText;
   }
 
   addTaskToList(): void {
@@ -28,7 +26,5 @@ export class InputComponent {
 
     this.taskService.addNewTask(this._inputText);
     this._inputText = '';
-
-    this.filterKeyword.emit(this._inputText);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../shared/task.service';
 
 @Component({
@@ -23,9 +23,7 @@ export class StatsComponent implements OnInit {
     );
   }
 
-  @Output() filterTasks: EventEmitter<string> = new EventEmitter();
-
-  chnageSeleltedTasks(selector: string): void {
-    this.filterTasks.emit(selector);
+  changeSeleltedTasks(selector: string): void {
+    this.taskService.filterKeyword = selector;
   }
 }
