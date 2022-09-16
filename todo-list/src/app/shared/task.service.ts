@@ -57,6 +57,7 @@ export class TaskService {
       checked: false,
     };
 
+    this._filterKeyword = 'all';
     this.tasks.push(newTask);
     this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
     this.updateTaskCounts();
@@ -87,6 +88,7 @@ export class TaskService {
     setTimeout(() => {
       this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
     }, 500);
+
     this.updateTaskCounts();
     this.setToLocalStorage();
   }
@@ -134,34 +136,49 @@ export class TaskService {
     return (
       JSON.parse(localStorage.getItem('tasks')!) || [
         {
-          id: 'asda',
-          text: 'Task List To Do 1',
-          checked: false,
-        },
-        {
-          id: 'oaishda',
-          text: 'Task List To Do 2',
-          checked: false,
-        },
-        {
-          id: 'asddfbdfa',
-          text: 'Task List To Do 3',
-          checked: false,
-        },
-        {
-          id: 'asdaqwed',
-          text: 'Task List To Do 4',
+          id: 'uniqueId1',
+          text: 'The Basics',
           checked: true,
         },
         {
-          id: 'asd1231da',
-          text: 'Task List To Do 5',
+          id: 'uniqueId2',
+          text: 'Components & Data Binding',
           checked: true,
         },
         {
-          id: 'asd4e3wfw32a',
-          text: 'Task List To Do 6',
+          id: 'uniqueId3',
+          text: 'Directives',
           checked: true,
+        },
+        {
+          id: 'uniqueId4',
+          text: 'Services & Dependency Injection',
+          checked: true,
+        },
+        {
+          id: 'uniqueId5',
+          text: 'Routing',
+          checked: false,
+        },
+        {
+          id: 'uniqueId6',
+          text: 'Observables',
+          checked: false,
+        },
+        {
+          id: 'uniqueId7',
+          text: 'Forms',
+          checked: false,
+        },
+        {
+          id: 'uniqueId8',
+          text: 'Pipes',
+          checked: false,
+        },
+        {
+          id: 'uniqueId9',
+          text: 'Http Requests',
+          checked: false,
         },
       ]
     );
