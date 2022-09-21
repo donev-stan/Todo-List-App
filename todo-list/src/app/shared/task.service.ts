@@ -1,8 +1,9 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Task } from './task';
 
 import { Dialog } from '@angular/cdk/dialog';
 import { EditDialogComponent } from '../list/edit-task-dialog/edit-dialog.component';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,14 +19,14 @@ export class TaskService {
 
   private _filterKeyword: string = 'all';
 
-  tasksUpdated: EventEmitter<Task[]> = new EventEmitter();
-  taskCountUpdated: EventEmitter<any> = new EventEmitter();
+  tasksUpdated: Subject<Task[]> = new Subject();
+  taskCountUpdated: Subject<any> = new Subject();
 
   set filterKeyword(value: string) {
     console.log(value);
 
     this._filterKeyword = value;
-    this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+    this.tasksUpdated.next(this.filterTasks(this._filterKeyword));
   }
 
   getTasks(): Task[] {
@@ -59,7 +60,7 @@ export class TaskService {
 
     this._filterKeyword = 'all';
     this.tasks.push(newTask);
-    this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+    this.tasksUpdated.next(this.filterTasks(this._filterKeyword));
     this.updateTaskCounts();
     this.setToLocalStorage();
   }
@@ -77,7 +78,7 @@ export class TaskService {
       ongoingCount: this.ongoingTasksCount,
     };
 
-    this.taskCountUpdated.emit(updatedCounts);
+    this.taskCountUpdated.next(updatedCounts);
   }
 
   updateTaskStatus(taskId: string): void {
@@ -86,7 +87,7 @@ export class TaskService {
     });
 
     setTimeout(() => {
-      this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+      this.tasksUpdated.next(this.filterTasks(this._filterKeyword));
     }, 500);
 
     this.updateTaskCounts();
@@ -109,7 +110,7 @@ export class TaskService {
         return task;
       });
 
-      this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+      this.tasksUpdated.next(this.filterTasks(this._filterKeyword));
       this.setToLocalStorage();
     });
   }
@@ -117,7 +118,7 @@ export class TaskService {
   deleteTask(taskId: string): void {
     this.tasks = this.tasks.filter((task: Task) => task.id !== taskId);
 
-    this.tasksUpdated.emit(this.filterTasks(this._filterKeyword));
+    this.tasksUpdated.next(this.filterTasks(this._filterKeyword));
     this.updateTaskCounts();
     this.setToLocalStorage();
   }
